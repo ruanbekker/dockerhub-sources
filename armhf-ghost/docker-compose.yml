@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  blog:
+    image: rbekker87/armhf-ghost:1.25
+    networks:
+      - appnet
+    environment:
+      SERVER_URL: blog.mydomain.co.za
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.backend=blog"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.docker.network=appnet"
+        - "traefik.port=2368"
+        - "traefik.frontend.passHostHeader=true"
+        - "traefik.frontend.rule=Host:blog.mydomain.co.za"
+
+networks:
+  appnet:
+    external: true
