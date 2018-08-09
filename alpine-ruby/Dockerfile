@@ -9,7 +9,7 @@ ADD banner /etc/banner
 ADD entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh \
-  && apk add --no-cache build-base ruby ruby-dev ruby-bundler ruby-rdoc openssl-dev \
+  && apk add --no-cache build-base ruby ruby-dev ruby-irb ruby-bundler ruby-rdoc openssl-dev \
   && gem install json --no-rdoc --no-ri \
   && gem cleanup \
   && rm -rf /usr/lib/ruby/gems/*/cache/* /var/cache/apk/* /tmp/* /var/tmp/*
