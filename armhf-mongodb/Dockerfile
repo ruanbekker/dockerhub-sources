@@ -5,4 +5,6 @@ RUN apt update \
     && apt install mongodb-server -y \
     && rm -rf /var/cache/apt/* /var/lib/apt/*
 
-CMD ["/usr/bin/mongod", "--bind_ip", "127.0.0.1", "--port", "27017", "--nojournal"]
+ADD ADD boot.sh /boot.sh
+
+CMD ["/bin/bash", "/boot.sh"]
