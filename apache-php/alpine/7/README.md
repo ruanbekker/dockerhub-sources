@@ -10,6 +10,7 @@ Dockerized Minimal Apache with PHP 7
 Distro: Alpine 3.7
 Apahce: 2.4.34-r0
 PHP: 7.2.8-r0
+Content Path: /var/www/localhost/htdocs
 ```
 
 ## Usage:
