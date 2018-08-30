@@ -1,0 +1,58 @@
+version: "3.4"
+
+services:
+  frontend:
+    image: rbekker87/armhf-nginx-proxy:alpine
+    networks:
+      - appnet
+    environment:
+      - UPSTREAM_NAME=backend
+      - UPSTREAM_PORT=2368
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.backend=frontend"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.docker.network=appnet"
+        - "traefik.port=2368"
+        - "traefik.frontend.passHostHeader=true"
+        - "traefik.frontend.rule=Host:myblog.mydomain.local"
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+
+  backend:
+    image: rbekker87/armhf-ghost:2.0.3
+    networks:
+      - appnet
+    volumes:
+      - type: bind
+        source: /mnt/volumes/ghost/content/data
+        target: /var/www/ghost/content/data
+    environment:
+      - ENV_TYPE=PROD
+      - SERVER_PORT=2368
+      - SERVER_URL=myblog.mydomain.local
+      - FROM_NAME=MyName
+      - SMTP_HOST=mail.domain.local
+      - SMTP_PORT=587
+      - SMTP_AUTH_USERNAME=me@mydomain.local
+      - SMTP_AUTH_PASSWORD=pass
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+
+networks:
+  appnet:
+    external: true
