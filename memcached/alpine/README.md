@@ -2,6 +2,12 @@
 
 Memcached on Alpine
 
+## Buidling this Image:
+
+```
+$ docker build -t user/repo:tag --build-arg BD=$(date +%F) .
+```
+
 ## Environment Variables:
 
 Environment variables that is not defined will use the default values
