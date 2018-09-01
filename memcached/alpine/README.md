@@ -1,4 +1,4 @@
-## rbekker87/memcached
+## Dockerized Memcached
 
 Memcached on Alpine
 
