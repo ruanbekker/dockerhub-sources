@@ -1,12 +1,11 @@
-FROM rbekker87/alpine:3.8
+FROM alpine:3.7
 
 ARG BD
 LABEL built_date=${BD}
 
-COPY entrypoint.sh /entrypoint.sh
-RUN apk --no-cache add memcached && chown memcached /etc/conf.d/memcached && chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN apk --no-cache add memcached
+COPY boot.sh /boot.sh
+RUN chmod +x /boot.sh
 
 USER memcached
-CMD ["memcached"]
+CMD ["/boot.sh"]
