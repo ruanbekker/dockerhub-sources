@@ -21,13 +21,18 @@ PORT="${MEMCACHED_PORT:-11211}"
 
 ## Run a Memcache Container:
 
+Below specified environment variables will be used as default if not specified
+
 ```
 $ docker run -it --name memcached \
   -p 11211:11211 \
-  -e MEMCACHED_MEMUSAGE=128 \
-  -e MEMCACHED_MAXCONN=1024 \
-  -e MEMCACHED_HOST=127.0.0.1 \
+  -e MEMCACHED_USER=memcached \
+  -e MEMCACHED_HOST=0.0.0.0 \
   -e MEMCACHED_PORT=11211 \
+  -e MEMCACHED_MEMUSAGE=64 \
+  -e MEMCACHED_MAXCONN=1024 \
+  -e MEMCACHED_THREADS=4 \
+  -e MEMCACHED_REQUESTS_PER_EVENT=20 \
   rbekker87/memcached:alpine 
 ```
 
