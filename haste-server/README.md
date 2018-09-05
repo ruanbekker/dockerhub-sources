@@ -38,3 +38,7 @@ Send the content of a file:
 $ cat myscript.py | haste
 http://localhost:7777/uyixosu
 ```
+
+## Screenshot:
+
+![](screenshots/image1.png)
