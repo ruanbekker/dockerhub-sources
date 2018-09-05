@@ -41,4 +41,4 @@ http://localhost:7777/uyixosu
 
 ## Screenshot:
 
-![](screenshots/image1.png)
+![](screenshots/image.png)
