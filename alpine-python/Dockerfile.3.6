@@ -1,0 +1,6 @@
+FROM alpine
+
+RUN apk --no-cache add python3 py3-setuptools && easy_install-3.6 pip
+RUN ln -s $(which python3) /usr/bin/python
+
+CMD ["sh"]
