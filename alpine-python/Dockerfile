@@ -9,6 +9,6 @@ RUN apk add --no-cache \
     python \
     py2-pip \
     && chmod +x /entrypoint.sh \
-    && rm -rf /var/cache/apt/*
+    && rm -rf /var/cache/apk/*
 
 CMD ["/entrypoint.sh"]
