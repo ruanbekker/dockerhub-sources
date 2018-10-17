@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  random-api:
+    image: rbekker87/random-api:01
+    networks:
+      - appnet
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.backend.loadbalancer.sticky=false"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend=random-api"
+        - "traefik.docker.network=appnet"
+        - "traefik.entrypoints=https"
+        - "traefik.frontend.passHostHeader=true"
+        - "traefik.frontend.rule=Host:api.domain.com"
+        - "traefik.port=5000"
+
+networks:
+  appnet:
+    external: true
