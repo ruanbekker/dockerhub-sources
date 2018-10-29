@@ -20,13 +20,12 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
     3CEF8262806D3F0B6BA1DBDD7956EE477F901A30 \
     280DB7845A1DCAC92BB5A00A946B02565DC00AA7
 
-COPY php.ini /usr/local/etc/php/conf.d/mediawiki.ini
+COPY config/php.ini /usr/local/etc/php/conf.d/mediawiki.ini
+COPY config/mediawiki.conf /etc/apache2/
 
-COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf
 
-COPY docker-entrypoint.sh /entrypoint.sh
+COPY scripts/docker-base-entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["apache2-foreground"]
