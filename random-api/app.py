@@ -27,5 +27,23 @@ def people():
 
     return jsonify(data)
 
+@app.route('/people/list')
+def peoplelist():
+    datalist = []
+    for x in xrange(3):
+        
+        data = {
+            "name": choice(names),
+            "surname": choice(surnames),
+            "country": choice(countries),
+            "age": randint(21,38),
+            "job": choice(jobs),
+            "experience_in_years": randint(1,30),
+            "hobbies": choice(hobbies_lists)
+        }
+        datalist.append(data)
+
+    return jsonify(datalist)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
