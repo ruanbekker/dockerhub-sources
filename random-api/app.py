@@ -30,7 +30,7 @@ def people():
 @app.route('/people/list')
 def peoplelist():
     datalist = []
-    for x in xrange(3):
+    for x in range(3):
         
         data = {
             "name": choice(names),
