@@ -1,4 +1,4 @@
-FROM rbekker87/alpine:3.8
+FROM alpine:latest
 
 MAINTAINER Ruan Bekker <ruan@ruanbekker.com>
 
@@ -8,7 +8,7 @@ ADD entrypoint.sh /entrypoint.sh
 RUN apk add --no-cache \
     python \
     py2-pip \
-    && chmod +x /entrypoint.sh \
+    # && chmod +x /entrypoint.sh \
     && rm -rf /var/cache/apk/*
 
-CMD ["/entrypoint.sh"]
+CMD ["/bin/sh"]
