@@ -13,16 +13,6 @@ RUN git clone https://github.com/c9/core.git /cloud9 \
   && rm -rf /var/cache/apk/* /opt/cloud9/.git /tmp/* \
   && npm cache clean
 
-RUN apk add --no-cache libc-dev linux-headers  build-base libffi-dev openssl-dev libxml2-dev libxslt-dev gcc make python3 py2-pip py-virtualenv ruby ruby-dev ruby-irb ruby-bundler ruby-rdoc  
-    
-RUN apk add --no-cache --virtual .build-deps bash gcc musl-dev openssl go \
-    && wget --no-check-certificate -O go.tgz https://dl.google.com/go/go1.12.1.src.tar.gz \
-    && tar -C /usr/local -xzf go.tgz \
-    && rm -rf go.tgz \
-    && cd /usr/local/go/src/ \
-    && ./make.bash && mkdir -p /opt/go && apk del .build-deps \
-    && echo 'export GOPATH=/opt/go' > /etc/profile.d/golang.sh && echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' >> /etc/profile.d/golang.sh 
- 
 WORKDIR /cloud9
 
 RUN sed -i -e 's_127.0.0.1_0.0.0.0_g' /cloud9/configs/standalone.js
